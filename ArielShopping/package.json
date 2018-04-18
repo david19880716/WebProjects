@@ -1,0 +1,19 @@
+{
+  "name": "arielshopping",
+  "version": "1.0.0",
+  "description": "This is a shopping website built for my wife's business",
+  "main": "app.js",
+  "scripts": {
+    "test": "testrun"
+  },
+  "repository": {
+    "type": "git",
+    "url": "WebProjects"
+  },
+  "author": "David.Dai",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.16.3",
+    "express3-handlebars": "^0.5.2"
+  }
+}
