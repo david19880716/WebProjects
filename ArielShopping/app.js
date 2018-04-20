@@ -2,9 +2,12 @@
 // use this a reference as to how to write express/node code and learn the syntax
 var express = require('express');
 
+// You can create a custom module which should not be placed in node_module folder
+// And usually they should be placed in lib folder. 
+// Think of custom modules as classes
+var fortune = require('./lib/fortune.js')
+
 var app = express();
-
-
 
 // set up handlebars view engine
 var handlebars = require('express3-handlebars')
@@ -23,20 +26,9 @@ app.get('/home', function(req, res){
     res.render('home');
 });
 
-//Dynamic content displayed on the view 
-// 1. variables defined in the app.js file
-// 2. views implemented with variables
-// 3. app.js file defines how to use the variables
-var fortunes = ["Conquer your fears or they will conquer you.",
-                "Rivers need springs.",
-                "Do not fear what you don't know.",
-                "You will have a pleasant surprise.",
-                "Whenever possible, keep it simple.",
-];
-
+// getFortune function has been added to the Global Variable exports so it is public to outside
 app.get('/about', function(req, res){
-    var randomFortune = fortunes[Math.floor(Math.random() * fortunes.length)];
-    res.render('about', { fortune: randomFortune });
+    res.render('about', { fortune: fortune.getFortune() });
 });
 
 //Custom 404 page - Middleware
