@@ -22,13 +22,24 @@ app.use(express.static(__dirname + '/public'));
 
 app.set('port', process.env.PORT || 3000); // process.env will return the environment variable if you have PORT set up
 
+//define a local variable in response which is available through view
+app.use(function(req, res, next){
+    res.locals.showTests = app.get('env') !== 'production' && req.query.test == 1;
+    next();
+});
+
 app.get('/home', function(req, res){
     res.render('home');
 });
 
 // getFortune function has been added to the Global Variable exports so it is public to outside
+// pageTestScript is a variable that triggers specific testing to happen, if the script location
+// is not null, it will run the test script from that specified location
 app.get('/about', function(req, res){
-    res.render('about', { fortune: fortune.getFortune() });
+    res.render('about', { 
+        fortune: fortune.getFortune(),
+        pageTestScript: '/qa/tests-about.js'
+    });
 });
 
 //Custom 404 page - Middleware

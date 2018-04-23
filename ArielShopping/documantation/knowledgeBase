@@ -1,0 +1,87 @@
+In web development, quality can be broken down into three dimensions:
+
+Reach
+Reach refers to the market penetration of your product: the number of people
+viewing your website or using your service. There’s a direct correlation between
+reach and profitability: the more people who visit the website, the more people who
+buy the product or service. From a development perspective, search engine optimization
+(SEO) will have the biggest impact on reach, which is why we will be
+including SEO in our QA plan.
+
+Functionality
+Once people are visiting your site or using your service, the quality of your site’s
+functionality will have a large impact on user retention: a site that works as
+advertised is more likely to drive return visits than one that isn’t. Unlike the other
+dimensions, functionality testing can often be automated.
+
+Usability
+Where functionality is concerned with functional correctness, usability evaluates
+human-computer interaction (HCI). The fundamental question is, “Is the
+functionality delivered in a way that is useful to the target audience?” This often
+translates to, “Is it easy to use?” though the pursuit of ease can often oppose flexibility
+or power: what seems easy to a programmer might be different than what
+seems easy to a nontechnical consumer. In other words, you must consider your target audience when assessing usability. 
+Since a fundamental input to a usability measurement is a user, usability is not usually something that can be automated.
+However, user testing should be included in your QA plan.
+
+Aesthetics
+Aesthetics is the most subjective of the three dimensions and is therefore the least
+relevant to development. While there are few development concerns when it comes
+to your site’s aesthetics, routine reviews of your site’s aesthetics should be part of
+your QA plan. Show your site to a representative sample audience, and find out if
+it feels dated or does not invoke the desired response. Keep in mind that aesthetics
+is time sensitive (aesthetic standards shift over time) and audience specific (what
+appeals to one audience may be completely uninteresting to another).
+
+While all four dimensions should be addressed in your QA plan, functionality testing
+and SEO can be tested automatically during development, so that will be the focus of
+this chapter.
+
+
+The Types of Tests
+
+Unit testing and integration testing (I am considering “system testing” to be a type of
+integration testing). Unit testing is very fine-grained, testing single components to make
+sure they function properly, whereas integration testing tests the interaction between
+multiple components, or even the whole system.
+
+In general, unit testing is more useful and appropriate for logic testing (although we
+will see some instances where it is used in presentation code as well). Integration testing
+is useful in both realms.
+
+Overview of QA Techniques
+In this book, we will be using the following techniques and software to accomplish
+thorough testing:
+
+Page testing
+
+“Page testing,” as the name implies, tests the presentation and frontend functionality
+of a page. This can involve both unit and integration testing. We will be using Mocha
+to achieve this.
+
+Cross-page testing
+
+Cross-page testing involves testing functionality that requires navigation from one
+page to another. For example, the checkout process in an ecommerce site usually
+spans multiple pages. Since this kind of testing inherently involves more than one
+component, it is generally considered integration testing. We will be using Zombie.js for this.
+
+Logic testing
+
+Logic testing will execute unit and integration tests against our logic domain. It will
+be testing only JavaScript, disconnected from any presentation functionality.
+
+Linting
+
+Linting isn’t about finding errors, but potential errors. The general concept of linting
+is that it identifies areas that could represent possible errors, or fragile constructs
+that could lead to errors in the future. We will be using JSHint for linting.
+
+Link checking
+
+Link checking (making sure there are no broken links on your site) falls into the
+category of “low-hanging fruit.” It may seem overkill on a simple project, but simple
+projects have a way of becoming complicated projects, and broken links will happen.
+Better to work link checking into your QA routine early. Link checking falls under
+the category of unit testing (a link is either valid or invalid). We will be using Link‐
+Checker for this.
