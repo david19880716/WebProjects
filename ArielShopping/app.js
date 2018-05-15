@@ -5,7 +5,7 @@ var express = require('express');
 // You can create a custom module which should not be placed in node_module folder
 // And usually they should be placed in lib folder. 
 // Think of custom modules as classes
-var fortune = require('./lib/fortune.js')
+var fortune = require('./lib/fortune.js');
 
 var app = express();
 
@@ -40,6 +40,14 @@ app.get('/about', function(req, res){
         fortune: fortune.getFortune(),
         pageTestScript: '/qa/tests-about.js'
     });
+});
+
+app.get('/nutritions/movefree', function(req, res){
+    res.render('nutritions/movefree');
+});
+
+app.get('/nutritions/request-group-discount', function(req, res){
+    res.render('nutritions/request-group-discount');
 });
 
 //Custom 404 page - Middleware

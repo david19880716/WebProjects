@@ -76,6 +76,8 @@ Linting
 Linting isn’t about finding errors, but potential errors. The general concept of linting
 is that it identifies areas that could represent possible errors, or fragile constructs
 that could lead to errors in the future. We will be using JSHint for linting.
+** We can use JSLint or JSHint and run the following command to invoke the linting testing
+    jshint app.js
 
 Link checking
 
@@ -85,3 +87,6 @@ projects have a way of becoming complicated projects, and broken links will happ
 Better to work link checking into your QA routine early. Link checking falls under
 the category of unit testing (a link is either valid or invalid). We will be using Link‐
 Checker for this.
+
+** We can use linkChecker to perform the link checking tests. It's cross-platform  and 
+offers command line as well as GUI
