@@ -10,8 +10,19 @@ var fortune = require('./lib/fortune.js');
 var app = express();
 
 // set up handlebars view engine
+/// TODO Understanding how section works 
 var handlebars = require('express3-handlebars')
-        .create({ defaultLayout:'main' });
+        .create({ 
+            defaultLayout:'main' ,
+            helpers: {
+                section: function(name, options) {
+                    if(!this._sections) this._sections = {};
+                    this._sections[name] = options.fn(this);
+                    return null;
+                }
+            }
+    });
+
 app.engine('handlebars', handlebars.engine);
 app.set('view engine', 'handlebars');
 
@@ -28,6 +39,15 @@ app.use(function(req, res, next){
     next();
 });
 
+// partials.exchangeRate is a local variable defined in the views/partials (In this case, exchange rate handlebars) 
+// which will carry the data from somewhere else (In this case, fortune.getExchangeRateData()) 
+// And the last step would be to use a view to render the views/partials
+app.use(function(req, res, next){
+    if(!res.locals.partials) res.locals.partials = {}
+    res.locals.partials.exchangeRate = fortune.getExchangeRateData();
+    next();
+})
+
 app.get('/home', function(req, res){
     res.render('home');
 });
@@ -42,12 +62,30 @@ app.get('/about', function(req, res){
     });
 });
 
+app.get('/jquery-test', function(req, res){
+	res.render('jquery-test');
+});
+
 app.get('/nutritions/movefree', function(req, res){
     res.render('nutritions/movefree');
 });
 
 app.get('/nutritions/request-group-discount', function(req, res){
     res.render('nutritions/request-group-discount');
+});
+
+
+// TODO This is related to client side handlebars 
+app.get('/nursery-rhyme', function(req, res){
+	res.render('nursery-rhyme');
+});
+app.get('/data/nursery-rhyme', function(req, res){
+	res.json({
+		animal: 'squirrel',
+		bodyPart: 'tail',
+		adjective: 'bushy',
+		noun: 'heck',
+	});
 });
 
 //Custom 404 page - Middleware

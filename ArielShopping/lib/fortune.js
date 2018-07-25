@@ -20,3 +20,25 @@ exports.getFortune = function() {
     var idx = Math.floor(Math.random() * fortunes.length);
     return fortunes[idx];
     };
+
+exports.getExchangeRateData = function() {
+    return {
+        currencies: [
+            {
+                srcCurrency: 'USD',
+                desCurrency: 'CNY',
+                exchangeRate: '6.78'
+            },
+            {
+                srcCurrency: 'EUR',
+                desCurrency: 'CNY',
+                exchangeRate: '7.94'
+            },
+            {
+                srcCurrency: 'GBP',
+                desCurrency: 'CNY',
+                exchangeRate: '8.89'
+            },
+        ],
+    };
+}

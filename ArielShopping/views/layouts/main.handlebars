@@ -1,15 +1,34 @@
 <!doctype html>
 <html>
 <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <title>Ariel Shopping</title>
+    {{{_sections.head}}}
     {{#if showTests}}
         <link rel="stylesheet" href="/vendor/mocha.css">
     {{/if}}
-    <script src="//code.jquery.com/jquery-2.0.2.min.js"></script>
+
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <link rel="stylesheet" href="/vendor/bootstrap/css/bootstrap.min.css">
+        <style>
+            body {
+                padding-top: 50px;
+                padding-bottom: 20px;
+            }
+        </style>
+        <link rel="stylesheet" href="/vendor/bootstrap/css/bootstrap-theme.min.css">
+        <link rel="stylesheet" href="/css/main.css">
+    
+    <script src="/vendor/js/modernizr-2.6.2-respond-1.1.0.min.js"></script>
 </head>
 <body>
     <header><img src="/img/shopping.gif" alt="Ariel Shopping Logo"></header>
     {{{body}}}
+    <script src="//code.jquery.com/jquery-2.0.2.min.js"></script>
+    {{{_sections.jquery}}}
 
     {{#if showTests}}
         <div id="mocha"></div>
@@ -25,5 +44,8 @@
         {{/if}}
         <script>mocha.run();</script>
     {{/if}}
+
+    <script src="/vendor/bootstrap/js/bootstrap.min.js"></script>
+    <script src="/js/main.js"></script>
 </body>
 </html>
