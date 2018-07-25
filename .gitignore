@@ -17,3 +17,6 @@ data
 
 # don't store SSL certs in repo!
 ssl
+
+# don't check in the local vs setting file
+.vscode 
