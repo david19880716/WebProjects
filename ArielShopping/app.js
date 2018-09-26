@@ -9,6 +9,8 @@ var fortune = require('./lib/fortune.js');
 
 var app = express();
 
+var bodyParser = require('body-parser');
+
 // set up handlebars view engine
 /// TODO Understanding how section works 
 var handlebars = require('express3-handlebars')
@@ -32,6 +34,13 @@ app.set('view engine', 'handlebars');
 app.use(express.static(__dirname + '/public')); 
 
 app.set('port', process.env.PORT || 3000); // process.env will return the environment variable if you have PORT set up
+
+// Since we are using POST for form submission, we will have to link in middleware to parse the URL-encoded body
+
+// This is the new way to implement body parser
+// TODO need to understand what this does
+app.use(bodyParser.urlencoded({extended : true}));
+app.use(bodyParser.json());
 
 //define a local variable in response which is available through view
 app.use(function(req, res, next){
@@ -79,6 +88,7 @@ app.get('/nutritions/request-group-discount', function(req, res){
 app.get('/nursery-rhyme', function(req, res){
 	res.render('nursery-rhyme');
 });
+
 app.get('/data/nursery-rhyme', function(req, res){
 	res.json({
 		animal: 'squirrel',
@@ -86,6 +96,21 @@ app.get('/data/nursery-rhyme', function(req, res){
 		adjective: 'bushy',
 		noun: 'heck',
 	});
+});
+                                                                        
+// TODO Understand how this works
+app.get('/newsletter', function(req, res){
+    // we will learn about CSRF later...for now, we just
+    // provide a dummy value
+    res.render('newsletter', { csrf: 'CSRF token goes here' });
+});
+
+app.post('/process', function(req, res){
+    console.log('Form (from querystring): ' + req.query.form);
+    console.log('CSRF token (from hidden form field): ' + req.body._csrf);
+    console.log('Name (from visible form field): ' + req.body.name);
+    console.log('Email (from visible form field): ' + req.body.email);
+    res.redirect(303, '/thank-you');
 });
 
 //Custom 404 page - Middleware
